@@ -1,0 +1,256 @@
+/* ---------------------------------------------------------------------------
+   Running Incremental — global styles
+   A dark, chunky, pixel-adjacent console aesthetic. Desktop-only, fixed split.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #12141a;
+  --panel: #1b1f29;
+  --panel-2: #222735;
+  --line: #333b4d;
+  --line-soft: #2a3141;
+  --text: #e7ecf3;
+  --muted: #98a2b8;
+  --accent: #f4a261;
+  --accent-2: #2a9d8f;
+  --good: #7fd18a;
+  --bad: #e0685f;
+  --gold: #ffd166;
+  --stage: 55%;
+  --radius: 6px;
+  --mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', 'Consolas', 'Liberation Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: var(--panel-2);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.08s, border-color 0.08s, transform 0.04s;
+}
+
+button:hover:not(:disabled) {
+  background: #2b3243;
+  border-color: #43506b;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: #d98b4a;
+  color: #23180c;
+  font-weight: 700;
+}
+
+button.primary:hover:not(:disabled) {
+  background: #f6b57e;
+}
+
+button.ghost {
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* --- panels ---------------------------------------------------------------- */
+
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+.panel + .panel {
+  margin-top: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row.between {
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 11px;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.good {
+  color: var(--good);
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* --- bars ------------------------------------------------------------------ */
+
+.bar {
+  position: relative;
+  height: 12px;
+  background: #0d0f14;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-2), #4fd1c5);
+}
+
+.bar.fatigue > span {
+  background: linear-gradient(90deg, #b5651d, var(--accent));
+}
+
+.bar.distance > span {
+  background: linear-gradient(90deg, #7c6cf0, #b39ddb);
+}
+
+/* --- scrollbars ------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e1015;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333b4d;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #43506b;
+}
+
+/* --- tooltips (v-tooltip directive) ---------------------------------------- */
+
+.tt {
+  position: fixed;
+  z-index: 999;
+  max-width: 260px;
+  padding: 6px 9px;
+  background: #0e1118;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre-line;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+}
+
+.tt.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* small arrow, flipped per placement */
+.tt::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #0e1118;
+  border: 2px solid var(--line);
+  transform: rotate(45deg);
+}
+
+.tt[data-place='bottom']::after {
+  top: -6px;
+  left: calc(50% - 4px);
+  border-right: none;
+  border-bottom: none;
+}
+
+.tt[data-place='top']::after {
+  bottom: -6px;
+  left: calc(50% - 4px);
+  border-left: none;
+  border-top: none;
+}
+
+.tt[data-place='right']::after {
+  left: -6px;
+  top: calc(50% - 4px);
+  border-right: none;
+  border-top: none;
+}
+
+.tt[data-place='left']::after {
+  right: -6px;
+  top: calc(50% - 4px);
+  border-left: none;
+  border-bottom: none;
+}
+

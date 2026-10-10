@@ -1,0 +1,24 @@
+{
+  "name": "running-incremental",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A finite-journey sports-science incremental: coach one runner from barely-2km to marathon finisher.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "balance": "vitest run src/sim/balance.test.js"
+  },
+  "dependencies": {
+    "pinia": "^2.3.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8"
+  }
+}
